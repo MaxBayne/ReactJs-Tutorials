@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes,Route,Link } from 'react-router-dom'
 
 //Import Styles
-import './App.css'
+import './styles/App.css'
 
 //Import Context Provider (Shared Data Cross Components)
 import ThemeProvider from './contexts/ThemeProvider.jsx'
