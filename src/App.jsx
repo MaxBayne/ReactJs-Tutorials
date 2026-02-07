@@ -5,10 +5,11 @@ import { BrowserRouter, Routes,Route,Link } from 'react-router-dom'
 import './styles/App.css'
 
 //Import Context Provider (Shared Data Cross Components)
-import ThemeProvider from './contexts/ThemeProvider.jsx'
+import AppThemeProvider from './contexts/AppThemeProvider.jsx'
 import UserProvider from './contexts/UserProvider.jsx'
 
 //Import Components 
+import NotFoundComponent from './components/NotFoundComponent.jsx'
 import HomeComponent from './components/HomeComponent.jsx';
 import HeaderComponent from './components/HeaderComponent.jsx';
 import SideMenusComponent from './components/SideMenusComponent.jsx';
@@ -23,7 +24,8 @@ import UseStateHookWithFormsComponent from './components/UseStateHookWithFormsCo
 import UseStateHookWithArraysComponent from './components/UseStateHookWithArraysComponent.jsx'
 import RequestLoanFormComponent from './components/RequestLoanFormComponent.jsx'
 import UseContextHookComponent from './components/UseContextHookComponent.jsx'
-import NotFoundComponent from './components/NotFoundComponent.jsx'
+import MaterialUIComponent from './components/MaterialUIComponent.jsx'
+import MaterialButtonsComponent from './components/MaterialButtonsComponent.jsx'
 
 
 
@@ -36,7 +38,7 @@ export default function App()
 
     <BrowserRouter>
 
-      <ThemeProvider>
+      <AppThemeProvider>
         <UserProvider>
         
 
@@ -50,6 +52,8 @@ export default function App()
           <div className="App-content">
 
             <Routes>
+              <Route path='*' element={<NotFoundComponent/>} />
+
               <Route path='/' element={<HomeComponent/>}/>
               <Route path='/css' element={<CssComponent/>}/>
               <Route path='/javascript' element={<JavaScriptComponent/>}/>
@@ -62,6 +66,8 @@ export default function App()
                 
               </Route>
 
+              <Route path='/useContext' element={<UseContextHookComponent/>}/>
+
               <Route path='/useState'>
                 <Route index element={<UseStateHookComponent/>}/>
                 <Route path='arrays' element={<UseStateHookWithArraysComponent/>}/>
@@ -69,8 +75,14 @@ export default function App()
                 <Route path='loanForm' element={<RequestLoanFormComponent/>}/>
               </Route>
               
-              <Route path='/useContext' element={<UseContextHookComponent/>}/>
-              <Route path='*' element={<NotFoundComponent/>} />
+              
+
+              <Route path='/materialUI'>
+                <Route index element={<MaterialUIComponent/>}/>
+                <Route path='buttons' element={<MaterialButtonsComponent/>}/>
+              </Route>
+
+              
 
             </Routes>
 
@@ -88,13 +100,14 @@ export default function App()
             <Link to="/useState/forms"> UseState With Forms </Link>
             <Link to="/useState/loanForm"> UseState With Forms (Loan) </Link>
             <Link to="/useContext"> UseContext </Link>
+            <Link to="/materialUI"> Material UI </Link>
 
           </div>
       
         </div>
 
         </UserProvider>
-      </ThemeProvider>
+      </AppThemeProvider>
 
     </BrowserRouter>
   )

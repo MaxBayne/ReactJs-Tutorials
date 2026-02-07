@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { UserContext } from "../Contexts/UserContext";
-import { ThemeContext } from "../Contexts/ThemeContext";
+import { UserContext } from "@/contexts/UserContext";
+import { AppThemeContext } from "@/contexts/AppThemeContext";
 
 export default function UseContextHookComponent()
 {
     const userContext = useContext(UserContext);
-    const themeContext = useContext(ThemeContext);
+    const themeContext = useContext(AppThemeContext);
 
 
 

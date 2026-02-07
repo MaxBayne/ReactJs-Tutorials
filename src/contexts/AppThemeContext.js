@@ -1,13 +1,47 @@
 
-import { createContext } from "react";
+import { createContext } from 'react';
+
+
+export const AppThemeContext = createContext(
+    {
+        mode: "light",
+        toggleTheme: () => {}
+    }
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //1- Create Context
-export const ThemeContext = createContext(
-{
-  theme: "light",
-  toggleTheme: () => {}
-}
-);
+// export const ThemeContext = createContext(
+// {
+//   theme: "light",
+//   toggleTheme: () => {}
+// }
+// );
 
 //2- Create Provider
 // export function ThemeProvider({ children }) 
