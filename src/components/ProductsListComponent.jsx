@@ -15,7 +15,7 @@ export default function ProductsListComponent()
     let productsList=productsData.map((product) => 
         {
             return(
-                <Link key={product.id} to={`/product/${product.id}`} >
+                <Link key={product.id} to={`/products/${product.id}`} >
                     <ProductCardComponent productId={product.id} productName={product.name} productPrice={product.price} productDescription={product.description}/>
                 </Link>
             )
