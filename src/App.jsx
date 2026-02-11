@@ -65,7 +65,8 @@ import RequestLoanFormComponent from './components/RequestLoanFormComponent.jsx'
 import UseContextHookComponent from './components/UseContextHookComponent.jsx'
 import MaterialUIComponent from './components/MaterialUIComponent.jsx'
 import MaterialButtonsComponent from './components/MaterialButtonsComponent.jsx'
-
+import UserEffectHookComponent from './components/UseEffectHookComponent.jsx';
+import UserMemoHookComponent from './components/UseMemoHookComponent.jsx';
 
 
 const drawerWidth = 240;
@@ -154,9 +155,12 @@ export default function App()
     const theme = useTheme();
     const { mode, toggleTheme } = React.useContext(AppThemeContext);
     const [openDrawer, setOpenDrawer] = React.useState(true);
+    const [materialUIMenuOpen,setMaterialUIMenuOpen]=React.useState(false);
     const [useStateMenuOpen,setUseStateMenuOpen]=React.useState(false);
     const [useContextMenuOpen,setUseContextMenuOpen]=React.useState(false);
-    const [materialUIMenuOpen,setMaterialUIMenuOpen]=React.useState(false);
+    const [useEffectMenuOpen,setUseEffectMenuOpen]=React.useState(false);
+    const [useMemoMenuOpen,setUseMemoMenuOpen]=React.useState(false);
+    
 
     
 
@@ -426,6 +430,89 @@ export default function App()
 
               </ListItemButton>
 
+
+              {/* material UI */}
+              <ListItemButton onClick={()=>{setMaterialUIMenuOpen(!materialUIMenuOpen);}}
+                sx={[
+                  {
+                    minHeight: 48,
+                    px: 2.5,
+                  },
+                  open
+                    ? {
+                        justifyContent: 'initial',
+                      }
+                    : {
+                        justifyContent: 'center',
+                      },
+                ]}>
+
+                <ListItemIcon
+                  sx={[
+                    {
+                      minWidth: 0,
+                      justifyContent: 'center',
+                    },
+                    openDrawer
+                      ? {
+                          mr: 3,
+                        }
+                      : {
+                          mr: 'auto',
+                        },
+                  ]}
+                >
+                  <AppsIcon />
+                </ListItemIcon>
+
+                <ListItemText 
+                  primary="Material UI"
+                  sx={[
+                    openDrawer
+                      ? {
+                          opacity: 1,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}>
+                </ListItemText>
+
+
+                <Box sx={[
+                    openDrawer
+                      ? {
+                          opacity: 1,
+                          ml:18,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}>
+                  {useStateMenuOpen ? <ExpandLess /> : <ExpandMore />}                
+                </Box>
+                
+
+              </ListItemButton>
+              {/* material UI Sub Menus */}
+              <Collapse in={materialUIMenuOpen} timeout="auto" unmountOnExit>
+
+                <List component="div" disablePadding>
+                  
+                  <ListItemButton 
+                  component={Link}
+                  to="/materialUI"
+                  sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <LabelImportantIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Material UI" />
+                  </ListItemButton>
+
+                </List>
+              </Collapse>
+
+              
               {/* useState */}
               <ListItemButton onClick={()=>{setUseStateMenuOpen(!useStateMenuOpen);}}
                 sx={[
@@ -489,7 +576,6 @@ export default function App()
                 
 
               </ListItemButton>
-              
               {/* useState Sub Menus */}
               <Collapse in={useStateMenuOpen} timeout="auto" unmountOnExit>
 
@@ -601,7 +687,6 @@ export default function App()
                 
 
               </ListItemButton>
-              
               {/* useContext Sub Menus */}
               <Collapse in={useContextMenuOpen} timeout="auto" unmountOnExit>
 
@@ -620,8 +705,8 @@ export default function App()
                 </List>
               </Collapse>
 
-              {/* material UI */}
-              <ListItemButton onClick={()=>{setMaterialUIMenuOpen(!materialUIMenuOpen);}}
+              {/* useEffect */}
+              <ListItemButton onClick={()=>{setUseEffectMenuOpen(!useEffectMenuOpen);}}
                 sx={[
                   {
                     minHeight: 48,
@@ -651,11 +736,11 @@ export default function App()
                         },
                   ]}
                 >
-                  <AppsIcon />
+                  <WebhookIcon />
                 </ListItemIcon>
 
                 <ListItemText 
-                  primary="Material UI"
+                  primary="Hook (useEffect)"
                   sx={[
                     openDrawer
                       ? {
@@ -678,25 +763,105 @@ export default function App()
                           opacity: 0,
                         },
                   ]}>
-                  {useStateMenuOpen ? <ExpandLess /> : <ExpandMore />}                
+                  {useEffectMenuOpen ? <ExpandLess /> : <ExpandMore />}                
                 </Box>
                 
 
               </ListItemButton>
-              
-              {/* material UI Sub Menus */}
-              <Collapse in={materialUIMenuOpen} timeout="auto" unmountOnExit>
+              {/* useEffect Sub Menus */}
+              <Collapse in={useEffectMenuOpen} timeout="auto" unmountOnExit>
 
                 <List component="div" disablePadding>
                   
                   <ListItemButton 
                   component={Link}
-                  to="/materialUI"
+                  to="/useEffect"
                   sx={{ pl: 4 }}>
                     <ListItemIcon>
                       <LabelImportantIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Material UI" />
+                    <ListItemText primary="UseEffect" />
+                  </ListItemButton>
+
+                </List>
+              </Collapse>
+
+              {/* useMemo */}
+              <ListItemButton onClick={()=>{setUseMemoMenuOpen(!useMemoMenuOpen);}}
+                sx={[
+                  {
+                    minHeight: 48,
+                    px: 2.5,
+                  },
+                  open
+                    ? {
+                        justifyContent: 'initial',
+                      }
+                    : {
+                        justifyContent: 'center',
+                      },
+                ]}>
+
+                <ListItemIcon
+                  sx={[
+                    {
+                      minWidth: 0,
+                      justifyContent: 'center',
+                    },
+                    openDrawer
+                      ? {
+                          mr: 3,
+                        }
+                      : {
+                          mr: 'auto',
+                        },
+                  ]}
+                >
+                  <WebhookIcon />
+                </ListItemIcon>
+
+                <ListItemText 
+                  primary="Hook (useMemo)"
+                  sx={[
+                    openDrawer
+                      ? {
+                          opacity: 1,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}>
+                </ListItemText>
+
+
+                <Box sx={[
+                    openDrawer
+                      ? {
+                          opacity: 1,
+                          ml:18,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}>
+                  {useMemoMenuOpen ? <ExpandLess /> : <ExpandMore />}                
+                </Box>
+                
+
+              </ListItemButton>
+              {/* useMemo Sub Menus */}
+              <Collapse in={useMemoMenuOpen} timeout="auto" unmountOnExit>
+
+                <List component="div" disablePadding>
+                  
+                  <ListItemButton 
+                  component={Link}
+                  to="/useMemo"
+                  sx={{ pl: 4 }}>
+                    <ListItemIcon>
+                      <LabelImportantIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="UseMemo" />
                   </ListItemButton>
 
                 </List>
@@ -727,17 +892,16 @@ export default function App()
                <Route path='/css' element={<CssComponent/>}/>
                <Route path='/javascript' element={<JavaScriptComponent/>}/>
 
-
+               <Route path='/products'>
+                 <Route index element={<ProductsProvider> <ProductsListComponent/> </ProductsProvider>}/> 
+                 <Route path=':id' element={<ProductsProvider> <ProductDetailComponent/> </ProductsProvider>}/>
+               </Route>
                
-               
-                  <Route path='/products'>
-                    <Route index element={<ProductsProvider> <ProductsListComponent/> </ProductsProvider>}/> 
-                    <Route path=':id' element={<ProductsProvider> <ProductDetailComponent/> </ProductsProvider>}/>
-                  </Route>
-               
-               
-
                <Route path='/useContext' element={<UseContextHookComponent/>}/>
+
+               <Route path='/useEffect' element={<UserEffectHookComponent/>}/>
+
+               <Route path='/useMemo' element={<UserMemoHookComponent/>}/>
 
                <Route path='/useState'>
                  <Route index element={<UseStateHookComponent/>}/>

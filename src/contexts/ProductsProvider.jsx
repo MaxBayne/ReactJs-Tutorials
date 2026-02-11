@@ -29,15 +29,14 @@ const initialProducts = [
 //2- Create Context Provider like Component to wrap consumed Components
 export default function ProductsProvider({ children }) 
 {
-  // ✅ Lazy initialization from localStorage
+  
   const [products, setProducts] = React.useState(() => 
   {
-    const stored = localStorage.getItem(productsKeyInsideLocalStorage);
-    return stored ? JSON.parse(stored) : initialProducts;
+     const stored = localStorage.getItem(productsKeyInsideLocalStorage);
+     return stored ? JSON.parse(stored) : initialProducts;
   });
 
-
-  // ✅ Persist to localStorage whenever products change
+  //save products to localStorage whenever products array changed
   React.useEffect(() => 
   {
     localStorage.setItem(productsKeyInsideLocalStorage,JSON.stringify(products));
