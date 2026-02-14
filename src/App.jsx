@@ -66,6 +66,7 @@ import MaterialButtonsComponent from "./components/MaterialButtonsComponent.jsx"
 import UserEffectHookComponent from "./components/UseEffectHookComponent.jsx";
 import UserMemoHookComponent from "./components/UseMemoHookComponent.jsx";
 import UserReducerHookComponent from "./components/UseReducerHookComponent.jsx";
+import WeatherComponent from "./components/WeatherComponent.jsx";
 
 const drawerWidth = 240;
 
@@ -157,6 +158,7 @@ export default function App() {
   const [useEffectMenuOpen, setUseEffectMenuOpen] = React.useState(false);
   const [useMemoMenuOpen, setUseMemoMenuOpen] = React.useState(false);
   const [useReducerMenuOpen, setUseReducerMenuOpen] = React.useState(false);
+  const [apiMenuOpen, setApiMenuOpen] = React.useState(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -940,6 +942,93 @@ export default function App() {
                  
                 </List>
               </Collapse>
+
+              {/* api */}
+              <ListItemButton
+                onClick={() => {
+                  setApiMenuOpen(!apiMenuOpen);
+                }}
+                sx={[
+                  {
+                    minHeight: 48,
+                    px: 2.5,
+                  },
+                  open
+                    ? {
+                        justifyContent: "initial",
+                      }
+                    : {
+                        justifyContent: "center",
+                      },
+                ]}
+              >
+                <ListItemIcon
+                  sx={[
+                    {
+                      minWidth: 0,
+                      justifyContent: "center",
+                    },
+                    openDrawer
+                      ? {
+                          mr: 3,
+                        }
+                      : {
+                          mr: "auto",
+                        },
+                  ]}
+                >
+                  <WebhookIcon />
+                </ListItemIcon>
+
+                <ListItemText
+                  primary="Api (Axios)"
+                  sx={[
+                    openDrawer
+                      ? {
+                          opacity: 1,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}
+                ></ListItemText>
+
+                <Box
+                  sx={[
+                    openDrawer
+                      ? {
+                          opacity: 1,
+                          ml: 18,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}
+                >
+                  {apiMenuOpen ? <ExpandLess /> : <ExpandMore />}
+                </Box>
+              </ListItemButton>
+              {/* api Sub Menus */}
+              <Collapse in={apiMenuOpen} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <ListItemButton
+                    component={Link}
+                    to="/api/weather"
+                    sx={{ pl: 4 }}
+                  >
+                    <ListItemIcon>
+                      <LabelImportantIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Weather" />
+                  </ListItemButton>
+
+                 
+                </List>
+              </Collapse>
+
+
+
+
             </ListItem>
           </List>
         </Drawer>
@@ -1007,6 +1096,11 @@ export default function App() {
               <Route index element={<MaterialUIComponent />} />
               <Route path="buttons" element={<MaterialButtonsComponent />} />
             </Route>
+
+             <Route path="/api">
+              <Route path="weather" element={<WeatherComponent />} />
+            </Route>
+
           </Routes>
         </Box>
       </>
