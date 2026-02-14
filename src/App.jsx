@@ -936,6 +936,8 @@ export default function App() {
                     </ListItemIcon>
                     <ListItemText primary="UseReducer" />
                   </ListItemButton>
+
+                 
                 </List>
               </Collapse>
             </ListItem>
@@ -961,8 +963,7 @@ export default function App() {
                 index
                 element={
                   <ProductsProvider>
-                    {" "}
-                    <ProductsListComponent />{" "}
+                    <ProductsListComponent />
                   </ProductsProvider>
                 }
               />
@@ -970,8 +971,7 @@ export default function App() {
                 path=":id"
                 element={
                   <ProductsProvider>
-                    {" "}
-                    <ProductDetailComponent />{" "}
+                    <ProductDetailComponent />
                   </ProductsProvider>
                 }
               />
@@ -984,6 +984,11 @@ export default function App() {
             <Route path="/useMemo" element={<UserMemoHookComponent />} />
 
             <Route path="/useReducer" element={<UserReducerHookComponent />} />
+
+            <Route path="/useReducer">
+              <Route index element={<UserReducerHookComponent />} />
+             
+            </Route>
 
             <Route path="/useState">
               <Route index element={<UseStateHookComponent />} />

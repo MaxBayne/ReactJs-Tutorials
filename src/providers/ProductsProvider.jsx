@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { ProductsContext } from "@/contexts/ProductsContext.js";
+import ProductsReducer from "@/reducers/ProductsReducer.js";
 import { v4 as uuidv4 } from 'uuid';
 
 const productsKeyInsideLocalStorage="productsList";
@@ -30,7 +31,7 @@ const initialProducts = [
 export default function ProductsProvider({ children }) 
 {
   
-  const [products, setProducts] = React.useState(() => 
+  const [products, dispatch] = React.useReducer(ProductsReducer, initialProducts, () => 
   {
      const stored = localStorage.getItem(productsKeyInsideLocalStorage);
      return stored ? JSON.parse(stored) : initialProducts;
@@ -44,25 +45,17 @@ export default function ProductsProvider({ children })
 
   function addProduct(newProduct) 
   {
-    setProducts(prev => [...prev, newProduct]);
+    dispatch({ type: "ADD_PRODUCT", payload: newProduct });
   }
 
   function editProduct(modifiedProduct) 
   {
-    setProducts(prev =>
-      prev.map(product =>
-        product.id === modifiedProduct.id
-          ? { ...product, ...modifiedProduct }
-          : product
-      )
-    );
+    dispatch({ type: "EDIT_PRODUCT", payload: modifiedProduct });
   }
 
   function removeProduct(removedProduct)
   {
-    setProducts(prev =>
-      prev.filter(product => product.id !== removedProduct.id)
-    );
+    dispatch({ type: "REMOVE_PRODUCT", payload: removedProduct });
   }
 
 
